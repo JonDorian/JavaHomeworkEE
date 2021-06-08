@@ -15,6 +15,7 @@
         <thead>
         <tr>
           <th>#</th>
+          <th>id</th>
           <th>Имя</th>
           <th>Фамилия</th>
           <th>Возраст</th>
@@ -24,12 +25,19 @@
         <c:forEach var="user" items="${userList}" varStatus="status">
           <tr>
             <td>${status.index + 1}</td>
+            <td>${user.id}</td>
             <td>${user.name}</td>
             <td>${user.lastName}</td>
             <td>${user.age}</td>
             <td>
+              <form action="updateUser" method="get">
+                <input type="hidden" name="userId" value="${user.id}">
+                <button type="submit">Изменить данные</button>
+              </form>
+            </td>
+            <td>
               <form action="deleteUser" method="post">
-                <input type="hidden" name="id" value="${status.index}">
+                <input type="hidden" name="listNumber" value="${status.index}">
                 <button type="submit">Удалить</button>
               </form>
             </td>
@@ -41,9 +49,6 @@
   </div>
   <form action="addUser" method="get" style="text-align: center; margin-top: 30px;">
     <input type="submit" value="Добавить нового пользователя">
-  </form>
-  <form action="updateUser" method="get" style="text-align: center; margin-top: 30px;">
-    <input type="submit" value="Изменить данные пользователя">
   </form>
 </div>
 </body>

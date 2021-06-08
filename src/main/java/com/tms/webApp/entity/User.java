@@ -4,17 +4,15 @@ public class User {
   private String name;
   private String lastName;
   private int age;
-
-  public User() {
-    name = "Vasiliy";
-    lastName = "Popov";
-    age = 27;
-  }
+  private final int id;
+  private static int counter;
 
   public User(String name, String lastName, int age) {
     this.name = name;
     this.lastName = lastName;
     this.age = age;
+    id = counter;
+    counter++;
   }
 
   public void setName(String name) {
@@ -39,5 +37,9 @@ public class User {
 
   public int getAge() {
     return age;
+  }
+
+  public int getId() {
+    return id;
   }
 }

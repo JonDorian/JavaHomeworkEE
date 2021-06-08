@@ -9,7 +9,6 @@ public class UsersRepository {
 
   private UsersRepository() {
     userList.add(new User("Ivan", "Karpovich", 22));
-    userList.add(new User());
     userList.add(new User("Aleksey", "Popov", 53));
     userList.add(new User("Rodion", "Titovich", 29));
   }
@@ -26,13 +25,17 @@ public class UsersRepository {
     userList.add(newUser);
   }
 
-  public void updateUser(int userId, User user) {
-    if (!userList.isEmpty() && userId < userList.size()) {
-      userList.set(userId, user);
+  public User getUser(int index) {
+    return userList.get(index);
+  }
+
+  public void updateUser(int listNumber, User user) {
+    if (!userList.isEmpty() && listNumber < userList.size()) {
+      userList.set(listNumber, user);
     }
   }
 
-  public void deleteUser(int userId) {
-    userList.remove(userId);
+  public void deleteUser(int listNumber) {
+    userList.remove(listNumber);
   }
 }

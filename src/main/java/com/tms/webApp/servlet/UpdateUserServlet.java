@@ -11,20 +11,26 @@ import java.io.IOException;
 @WebServlet(value = "/updateUser")
 public class UpdateUserServlet extends HttpServlet {
   private final UsersRepository usersRepository = UsersRepository.getUsersRepository();
+  int currentUserId;
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    int numberOfUsers = usersRepository.getUserList().size();
-    req.setAttribute("numberOfUsers", numberOfUsers);
+    currentUserId = Integer.parseInt(req.getParameter("userId"));
+    req.setAttribute("userId", currentUserId);
     req.getRequestDispatcher("WEB-INF/updateUser.jsp").forward(req, resp);
   }
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     if (!usersRepository.getUserList().isEmpty()) {
-      int id = Integer.parseInt(req.getParameter("userId")) - 1;
-      final User user = new User(req.getParameter("newName"), req.getParameter("newLastName"), Integer.parseInt(req.getParameter("newAge")));
-      usersRepository.updateUser(id, user);
+      for (User user: usersRepository.getUserList()) {
+        if (user.getId() == currentUserId){
+          user.setName(req.getParameter("newName"));
+          user.setLastName(req.getParameter("newLastName"));
+          user.setAge(Integer.parseInt(req.getParameter("newAge")));
+          break;
+        }
+      }
     }
     resp.sendRedirect("userInfo");
   }

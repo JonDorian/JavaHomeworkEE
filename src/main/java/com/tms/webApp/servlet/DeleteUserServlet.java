@@ -13,8 +13,8 @@ public class DeleteUserServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    int userId = Integer.parseInt(req.getParameter("id"));
-    usersRepository.deleteUser(userId);
+    int listNumber = Integer.parseInt(req.getParameter("listNumber"));
+    usersRepository.deleteUser(listNumber);
     resp.sendRedirect("userInfo");
   }
 }
